@@ -1,6 +1,6 @@
 name: base85
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+description: Base85 encoder/decoder Base85 encoder/decoder Base85 encoder/decoder Base85 encoder/decoder.
+version: 1.0.2
 homepage: https://github.com/litaoh/base85
 
 environment:

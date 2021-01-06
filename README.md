@@ -6,20 +6,20 @@ Supported encoding specifications
 
 * [Ascii85](http://en.wikipedia.org/wiki/Ascii85)
 * [ZeroMQ](http://rfc.zeromq.org/spec:32)
+* [IPv6](https://tools.ietf.org/html/rfc1924)
 
 ## Example
 
 Base85
 
 ``` dart
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:base85/base85.dart';
 
 void main() {
-  var z85 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST' //
-      'UVWXYZ.-:+=^!/*?&<>()[]{}@%\$#';
-  var codec = Base85Codec(z85);
+  var codec = Base85Codec(Alphabets.z85);
   var encode = codec.encode(Uint8List.fromList('Hello, world!!!!'.codeUnits));
   print(encode);
 
@@ -28,25 +28,31 @@ void main() {
 
   /// =>   Hello, world!!!!
 
-  var ascii85 = '!"#\$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRS' //
-      'TUVWXYZ[\\]^_`abcdefghijklmnopqrstu';
-  codec = Base85Codec(ascii85);
+  codec = Base85Codec(Alphabets.ascii85, AlgoType.ascii85);
   print(codec.encode(Uint8List.fromList('Hello, world'.codeUnits)));
-  /// =>    87cURD_*#TDfTZ)
 
-  print(String.fromCharCodes(codec.decode('87cURD_*#TDfTZ)')));
+  /// =>    <~87cURD_*#TDfTZ)~>
+  print(String.fromCharCodes(codec.decode('<~87cURD_*#TDfTZ)~>')));
+
   /// =>    Hello, world
+
+  codec = Base85Codec(Alphabets.IPv6, AlgoType.IPv6);
+  var address = InternetAddress(
+    '1080::8:800:200c:417a',
+    type: InternetAddressType.IPv6,
+  );
+  print(codec.encode(address.rawAddress));
+
+  /// =>    4)+k&C#VzJ4br>0wv%Yp
+  ///
+  var decode = codec.decode('4)+k&C#VzJ4br>0wv%Yp');
+  address = InternetAddress.fromRawAddress(
+    decode,
+    type: InternetAddressType.IPv6,
+  );
+  print(address.address);
+
+  /// =>    1080::8:800:200c:417a
 }
 
 ```
-
-### Alphabets
-
-See below for a list of commonly recognized alphabets.
-
-Algo | Alphabet
-------------- | -------------
-z85 | ```0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#```
-ascii85 | ```!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstu```
-
-
