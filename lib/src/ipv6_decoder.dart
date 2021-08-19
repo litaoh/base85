@@ -4,7 +4,7 @@ var _byteMask = BigInt.from(0xff);
 
 class Ipv6Decoder extends Converter<String, Uint8List> {
   String alphabet;
-  Uint8List _baseMap;
+  late Uint8List _baseMap;
 
   Ipv6Decoder(this.alphabet) {
     _baseMap = Uint8List(256);
