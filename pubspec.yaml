@@ -1,10 +1,10 @@
 name: base85
-description: Base85 encoder/decoder Base85 encoder/decoder Base85 encoder/decoder Base85 encoder/decoder.
-version: 1.0.2
+description: Base85 encoder & decoder
+version: 1.0.3
 homepage: https://github.com/litaoh/base85
 
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dev_dependencies:
   pedantic: ^1.9.0
