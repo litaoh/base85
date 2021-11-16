@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Support null safety
+
 ## 1.0.2
 
 - support [RFC 1924](https://tools.ietf.org/html/rfc1924)

@@ -5,7 +5,7 @@ import 'package:base85/base85.dart';
 
 void main() {
   var codec = Base85Codec(Alphabets.z85);
-  String encode = codec.encode(Uint8List.fromList('Hello, world!!!!'.codeUnits));
+  var encode = codec.encode(Uint8List.fromList('Hello, world!!!!'.codeUnits));
   print(encode);
 
   /// =>   nm=QNz.92Pz/PV8aT50L
@@ -30,7 +30,7 @@ void main() {
 
   /// =>    4)+k&C#VzJ4br>0wv%Yp
   ///
-  Uint8List decode = codec.decode('4)+k&C#VzJ4br>0wv%Yp');
+  var decode = codec.decode('4)+k&C#VzJ4br>0wv%Yp');
   address = InternetAddress.fromRawAddress(
     decode,
     type: InternetAddressType.IPv6,
