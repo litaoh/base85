@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Fix ascii85 encoding
+
 ## 1.0.3
 
 - Support null safety

@@ -16,18 +16,18 @@ class Base85Encoder extends Converter<Uint8List, String> {
   /// The [bytes] to encode, may be a [Uint8List]
   /// return A String with the encoded [bytes].
   String convert(Uint8List bytes) {
-    if (bytes.length % 4 != 0) {
+    if (algo == AlgoType.z85 && bytes.length % 4 != 0) {
       throw FormatException('Wrong length');
     }
     var padding = (bytes.length % 4 == 0) ? 0 : 4 - bytes.length % 4;
 
     var result = '';
     for (var i = 0; i < bytes.length; i += 4) {
-      /// 32 bit number of the current 4 bytes (padded with 0 as necessary)
+      /// 32-bit number of the current 4 bytes (padded with 0 as necessary)
       var num = ((bytes[i] << 24).toUnsigned(32)) +
-          (((i + 1 > bytes.length ? 0 : bytes[i + 1]) << 16).toUnsigned(32)) +
-          (((i + 2 > bytes.length ? 0 : bytes[i + 2]) << 8).toUnsigned(32)) +
-          (((i + 3 > bytes.length ? 0 : bytes[i + 3]) << 0).toUnsigned(32));
+          (((i + 1 >= bytes.length ? 0 : bytes[i + 1]) << 16).toUnsigned(32)) +
+          (((i + 2 >= bytes.length ? 0 : bytes[i + 2]) << 8).toUnsigned(32)) +
+          (((i + 3 >= bytes.length ? 0 : bytes[i + 3]) << 0).toUnsigned(32));
 
       /// Create 5 characters from '!' to 'u' alphabet
       var block = <String>[];

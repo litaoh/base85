@@ -1,6 +1,6 @@
 name: base85
-description: Base85 encoder & decoder
-version: 1.0.3
+description: Base85 encoder/decoder written in native Dart.
+version: 1.0.4
 homepage: https://github.com/litaoh/base85
 
 environment:
